@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Controllo telecamera</title>
+</head>
+<body>
+	<h1>Controllo telecamera</h1>
+
+	<!-- Avvia partita -->
+	<button onclick="avviaPartita()">Avvia partita</button>
+
+	<!-- Ferma partita -->
+	<button onclick="fermaPartita()">Ferma partita</button>
+
+	<!-- Esegui highlight -->
+	<button onclick="eseguiHighlight()">Esegui highlight</button>
+
+	<!-- Esegui buzzata -->
+	<button onclick="eseguiBuzzata()">Esegui buzzata</button>
+
+	<script>
+		// Indirizzo IP della telecamera
+		const IP_TELECAMERA = "http://supersantosvillage.myqnapcloud.com:40";
+
+		// Funzione per avviare la partita
+		function avviaPartita() {
+			const url = IP_TELECAMERA + "/axis-cgi/virtualinput/activate.cgi?schemaversion=1&port=1";
+			fetch(url);
+		}
+
+		// Funzione per fermare la partita
+		function fermaPartita() {
+			const url = IP_TELECAMERA + "/axis-cgi/virtualinput/deactivate.cgi?schemaversion=1&port=1";
+			fetch(url);
+		}
+
+		// Funzione per eseguire l'highlight
+		function eseguiHighlight() {
+			const url = IP_TELECAMERA + "/axis-cgi/io/virtualinput.cgi?action=6:/5000\\";
+			fetch(url);
+		}
+
+		 // Funzione per eseguire la buzzata
+		function eseguiBuzzata() {
+			const url = IP_TELECAMERA + "/axis-cgi/io/port.cgi?action=2:/5000\\";
+			fetch(url);
+		}
+	</script>
+</body>
+</html>
