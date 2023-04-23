@@ -1,49 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Controllo telecamera</title>
+	<meta charset="UTF-8">
+	<title>Controllo telecamera Axis</title>
 </head>
 <body>
-	<h1>Controllo telecamera</h1>
-
-	<!-- Avvia partita -->
-	<button onclick="avviaPartita()">Avvia partita</button>
-
-	<!-- Ferma partita -->
-	<button onclick="fermaPartita()">Ferma partita</button>
-
-	<!-- Esegui highlight -->
-	<button onclick="eseguiHighlight()">Esegui highlight</button>
-
-	<!-- Esegui buzzata -->
-	<button onclick="eseguiBuzzata()">Esegui buzzata</button>
-
+	<h1>Controllo telecamera Axis</h1>
+	<p>
+		<button onclick="startGame()">Avvia partita</button>
+		<button onclick="stopGame()">Fine partita</button>
+		<button onclick="highlight()">Evidenzia area</button>
+		<button onclick="buzz()">Suona buzz</button>
+	</p>
 	<script>
-		// Indirizzo IP della telecamera
-		const IP_TELECAMERA = "http://supersantosvillage.myqnapcloud.com:40";
-
-		// Funzione per avviare la partita
-		function avviaPartita() {
-			const url = IP_TELECAMERA + "/axis-cgi/virtualinput/activate.cgi?schemaversion=1&port=1";
-			fetch(url);
+		function startGame() {
+			var url = "http://root:saet@supersantosvillage.myqnapcloud.com:40/axis-cgi/virtualinput/activate.cgi?schemaversion=1&port=1";
+			sendRequest(url);
 		}
 
-		// Funzione per fermare la partita
-		function fermaPartita() {
-			const url = IP_TELECAMERA + "/axis-cgi/virtualinput/deactivate.cgi?schemaversion=1&port=1";
-			fetch(url);
+		function stopGame() {
+			var url = "http://root:saet@supersantosvillage.myqnapcloud.com:40/axis-cgi/virtualinput/deactivate.cgi?schemaversion=1&port=1";
+			sendRequest(url);
 		}
 
-		// Funzione per eseguire l'highlight
-		function eseguiHighlight() {
-			const url = IP_TELECAMERA + "/axis-cgi/io/virtualinput.cgi?action=6:/5000\\";
-			fetch(url);
+		function highlight() {
+			var url = "http://root:saet@supersantosvillage.myqnapcloud.com:40/axis-cgi/io/virtualinput.cgi?action=6:/5000";
+			sendRequest(url);
 		}
 
-		 // Funzione per eseguire la buzzata
-		function eseguiBuzzata() {
-			const url = IP_TELECAMERA + "/axis-cgi/io/port.cgi?action=2:/5000\\";
-			fetch(url);
+		function buzz() {
+			var url = "http://root:saet@supersantosvillage.myqnapcloud.com:40/axis-cgi/io/port.cgi?action=2:/5000";
+			sendRequest(url);
+		}
+
+		function sendRequest(url) {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", url, true);
+			xhr.send();
 		}
 	</script>
 </body>
